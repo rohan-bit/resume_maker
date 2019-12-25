@@ -42,6 +42,17 @@ class work_exp(models.Model):
     start_date = models.DateTimeField()
     job_des = models.TextField()
 
+class skillset(models.Model):
+    STATUS = (
+        (1, ('Advanced')),
+        (2, ('Intermidate')),
+        (3, ('Beginner')),
+    )
+    profile = models.ManyToManyField(Profile,null=True)
+    skill_text = models.CharField(max_length=30)
+    level = models.CharField(max_length=32,choices=STATUS,
+      default=3)
+
 class position_of_reponsiblity(models.Model):
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE,null=True)
     positon = models.CharField(max_length=255,null=False,default='0')
