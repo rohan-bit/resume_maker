@@ -1,0 +1,29 @@
+{%extends 'base.html'%}
+{% load widget_tweaks %}
+
+
+{%block content%}
+    <h2>Add Project</h2>
+    <form method="post">
+    {% csrf_token %}
+    {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field }}
+    {% endfor %}
+    {% for field in form %}
+      <p>
+        <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field|add_class:'form-control' }}
+<!--        -->
+<!--        {{ field }}-->
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+          {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary" >Add Project</button>
+  </form>
+{%endblock%}

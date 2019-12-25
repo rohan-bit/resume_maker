@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{%block content%}
+<head>
+    <title>
+        Welcome user
+    </title>
+</head>
+<body>
+    {%if user.is_authenticated %}
+        <p>welcome {{user.username}}</p>
+        <p>Add your project here</p>
+        <a class="btn btn-primary" href="{% url 'add_project' %}" role="button" >Add Project </a><br>
+        <p>Logout</p>
+        <a class="btn btn-success" href="{% url 'logout' %}" role="button">logout</a>
+        <br>
+        <p>View your Projects</p>
+        <a class="btn btn-warning" href="{% url 'view_project' %}" role="button">View</a>
+    {% else %}
+    <p>
+        Are you new to this website ?<br>
+        <a class="btn btn-success" href="{% url 'signup' %}" role="button">Sign Up</a>
+    </p>
+    {% endif %}
+</body>
+
+{%endblock%}

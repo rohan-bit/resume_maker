@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{% load widget_tweaks %}
+
+{%block content%}
+    <h2>
+        All The project are listed down below.
+    </h2>
+    {%for pro in project %}
+        {{ forloop.counter }}
+        <p>Project Name</p>
+        {{ pro.id }}
+        <p>Project Link</p>
+        <a href = '{{pro.project_github_link}}'>Go to the project</a>
+    {% endfor %}
+{%endblock%}
