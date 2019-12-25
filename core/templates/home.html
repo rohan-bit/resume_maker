@@ -8,7 +8,7 @@
 </head>
 <body>
     {%if user.is_authenticated %}
-        <p>welcome {{user.username}}</p>
+        <p>welcome {{user.first_name}} {{user.last_name}}</p>
         <p>Add your project here</p>
         <a class="btn btn-primary" href="{% url 'add_project' %}" role="button" >Add Project </a><br>
         <p>Logout</p>
@@ -20,6 +20,7 @@
     <p>
         Are you new to this website ?<br>
         <a class="btn btn-success" href="{% url 'signup' %}" role="button">Sign Up</a>
+        <a class="btn btn-warning" href="{% url 'login' %}" role="button">Login</a>
     </p>
     {% endif %}
 </body>

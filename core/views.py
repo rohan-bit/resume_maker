@@ -26,10 +26,8 @@ def signup(request):
         form = SignUpForm()
     return render(request,'signup.html',{'form': form})
 
-def log_in(request):
-    pass
 
-
+@login_required
 def logout_user(request):
     logout(request)
     return redirect('index')

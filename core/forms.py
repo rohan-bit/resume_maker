@@ -9,7 +9,7 @@ class SignUpForm(UserCreationForm):
     address = forms.CharField(max_length=150)
     class Meta :
         model = User
-        fields = ('username','email','password1','password2','address','phone_no',)
+        fields = ('username','email','first_name','last_name','password1','password2','address','phone_no',)
 
 class Add_Project(forms.ModelForm):
     class Meta :

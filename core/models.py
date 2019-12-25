@@ -25,7 +25,7 @@ class Project(models.Model):
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE,null=True)
     project_name = models.CharField(max_length = 150)
     project_bio = models.TextField()
-    project_tech_stack = models.TextField()
+    project_tech_stack = models.CharField(max_length=255)
     project_team_size = models.IntegerField()
     project_start_date = models.DateTimeField()
     project_github_link = models.CharField(max_length = 150)
