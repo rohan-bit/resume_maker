@@ -1,0 +1,13 @@
+{%extends 'base.html'%}
+{% load widget_tweaks %}
+
+{%block content%}
+    <h2>
+        All The education is listed down below.
+    </h2>
+    {%for pro in edu %}
+        {{ forloop.counter }}
+        <p>education title</p>
+        {{ pro.title }}<br>
+    {% endfor %}
+{%endblock%}

@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from core.models import Profile,Project
+from core.models import Profile,Project,Education,work_exp,skillset
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
 
@@ -15,6 +15,21 @@ class Add_Project(forms.ModelForm):
     class Meta :
         model = Project
         fields = ('project_name','project_bio','project_tech_stack','project_team_size','project_start_date','project_github_link',)
+
+class Add_Edu(forms.ModelForm):
+    class Meta :
+        model = Education
+        fields = ('title','percentage','grad_year',)
+
+class Add_Work_Exp(forms.ModelForm):
+    class Meta :
+        model = work_exp
+        fields = ('job_position','start_date','job_description')
+
+class Add_SkillSet(forms.ModelForm):
+    class Meta :
+        model = skillset
+        fields = ('skill_name','level',)
 
 
 # def add_project():
