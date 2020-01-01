@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <h2>
+        All The work experince is listed down below.
+    </h2>
+    {% for por in pors %}
+        <p>positon title</p>
+            {{por.position}}
+        <br>
+    {% endfor %}
+{% endblock %}

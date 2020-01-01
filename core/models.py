@@ -63,8 +63,16 @@ class skillset(models.Model):
 
 class position_of_reponsiblity(models.Model):
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE,null=True)
-    positon = models.CharField(max_length=255,null=False,default='0')
+    position = models.CharField(max_length=255,null=False)
+    start_date = models.DateTimeField(null=True)
+    end_date = models.DateTimeField(null=True)
 
 class Awards(models.Model):
     profile = models.ForeignKey(Profile,on_delete=models.CASCADE,null=True)
     des = models.TextField()
+
+# class Resume(models.Model):
+#     profile = models.ForeignKey(Profile,on_delete=models.CASCADE,null=True)
+#     projects = models.ManyToManyField(Project,null=True)
+#     skills = models.ManyToManyField(skillset,null=True)
+#     work_exp_resume = models.ManyToManyField(work_exp,null=True)

@@ -26,11 +26,20 @@
         <p>Add your work experince here</p>
         <a class="btn btn-primary" href="{% url 'add_work_exp' %}" role="button">Add Work Experince</a>
         <br>
+        <p>Add your work experince here</p>
+        <a class="btn btn-warning" href="{% url 'view_work_exp' %}" role="button">View</a>
+        <br>
         <p>Add your skills experince here</p>
         <a class="btn btn-primary" href="{% url 'add_skills' %}" role="button">Add Skills</a>
         <br>
         <p>View skills here</p>
-        <a class="btn btn-primary" href="{% url 'view_skills' %}" role="button">View</a>
+        <a class="btn btn-warning" href="{% url 'view_skills' %}" role="button">View</a>
+        <br>
+        <p>Add your position of responsibilty</p>
+        <a class="btn btn-primary" href="{% url 'add_position_of_responsibilty' %}" role="button">Add positon of responsibilty</a>
+        <br>
+        <p>View your position of responsibilty</p>
+        <a class="btn btn-warning" href="{% url 'view_position' %}" role="button">View</a>
     {% else %}
     <p>
         Are you new to this website ?<br>

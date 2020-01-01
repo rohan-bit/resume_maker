@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate,logout
 from django.shortcuts import render, redirect
-from core.forms import SignUpForm,Add_Project,Add_Edu,Add_Work_Exp,Add_SkillSet
-from core.models import Profile,Project,Education,work_exp,skillset
+from core.forms import SignUpForm,Add_Project,Add_Edu,Add_Work_Exp,Add_SkillSet,Add_postion_of_responsibilty
+from core.models import Profile,Project,Education,work_exp,skillset,position_of_reponsiblity,User
 # Create your views here.
 def index(request):
     return  render(request,'home.html')
@@ -88,13 +88,21 @@ def add_skillset(request):
         form = Add_SkillSet()
     return render(request,'add_skillset.html',{'form':form})
 
-@login_required
-def view_work_exp(request):
-    pass
 
 @login_required
-def pos(request):
-    pass
+def add_por(request):
+    if request.method == 'POST':
+        form = Add_postion_of_responsibilty(request.POST)
+        if form.is_valid():
+            por = form.save()
+            por.profile=request.user.profile
+            #por.profile.add(request.user.profile)
+            por.save()
+            return redirect('index')
+    else :
+        form = Add_postion_of_responsibilty()
+    return render(request,'add_por.html',{'form':form})
+
 
 
 #viewing
@@ -111,10 +119,47 @@ def view_education(request):
     return render(request,'view_education.html',{'edu':edu})
 
 @login_required
+def view_work_exp(request):
+    profile = request.user.profile
+    works = work_exp.objects.filter(profile=profile)
+    return render(request,'view_work_exp.html',{'works':works})
+
+
+@login_required
 def view_skillset(request):
     profile = request.user.profile
     skills = skillset.objects.filter(profile=profile)
     return render(request,'view_skill.html',{'skills':skills})
+
+
+@login_required
+def view_por(request):
+    profile = request.user.profile
+    pors = position_of_reponsiblity.objects.filter(profile=profile)
+    return render(request,'view_por.html',{'pors':pors})
+
+
+@login_required
+def resume_maker(request):
+    profile = request.user.profile
+    skills =  skillset.objects.filter(profile=profile).order_by('level')
+    print(skills)
+    return render(request,'home.html')
+
+
+#porfolio site
+
+def portfolio(request,username):
+    user1 = User.objects.get(username=username)
+    profile = user1.profile
+    skills = skillset.objects.filter(profile=profile).order_by('level')
+    projects = Project.objects.filter(profile=profile).order_by('-project_start_date')
+    edu = Education.objects.filter(profile=profile).order_by('-grad_year')
+    work = work_exp.objects.filter(profile=profile).order_by('-start_date')
+    print(projects,skills,edu,work)
+    return redirect('index')
+
+
 # def update_profile(request, user_id):
 #     user = User.objects.get(pk=user_id)
 #     user.profile.address = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'

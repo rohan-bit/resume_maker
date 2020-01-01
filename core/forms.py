@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from core.models import Profile,Project,Education,work_exp,skillset
+from core.models import Profile,Project,Education,work_exp,skillset,position_of_reponsiblity
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
 
@@ -30,6 +30,13 @@ class Add_SkillSet(forms.ModelForm):
     class Meta :
         model = skillset
         fields = ('skill_name','level',)
+
+
+class Add_postion_of_responsibilty(forms.ModelForm):
+    class Meta :
+        model = position_of_reponsiblity
+        fields = ('position','start_date','end_date')
+
 
 
 # def add_project():
