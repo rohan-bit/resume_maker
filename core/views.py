@@ -4,6 +4,13 @@ from django.contrib.auth import login, authenticate,logout
 from django.shortcuts import render, redirect
 from core.forms import SignUpForm,Add_Project,Add_Edu,Add_Work_Exp,Add_SkillSet,Add_postion_of_responsibilty
 from core.models import Profile,Project,Education,work_exp,skillset,position_of_reponsiblity,User
+from django.template.loader import get_template
+import tempfile
+import subprocess
+from subprocess import Popen, PIPE
+import os
+import pdflatex
+import sys
 # Create your views here.
 def index(request):
     return  render(request,'home.html')
@@ -69,6 +76,8 @@ def add_work_exp(request):
         if form.is_valid():
             work_exp = form.save()
             work_exp.profile = request.user.profile
+            work_exp.end_date = form.cleaned_data.get('end_date')
+            #print(work_exp.end_date)
             work_exp.save()
             return  redirect('index')
     else :
@@ -140,15 +149,40 @@ def view_por(request):
 
 
 @login_required
-def resume_maker(request):
+def resume_maker(request,value):
+    user1 = request.user
     profile = request.user.profile
-    skills =  skillset.objects.filter(profile=profile).order_by('level')
-    print(skills)
-    return render(request,'home.html')
+    skills = skillset.objects.filter(profile=profile).order_by('level')
+    projects = Project.objects.filter(profile=profile).order_by('-project_start_date')
+    edu = Education.objects.filter(profile=profile).order_by('-grad_year')
+    work = work_exp.objects.filter(profile=profile).order_by('-start_date')
+    pors = position_of_reponsiblity.objects.filter(profile=profile).order_by('-start_date')
+    context = {'user': user1, 'profile': profile, 'projects': projects, 'edu': edu, 'work': work, 'skills': skills,
+               'pors': pors}
+    print(value)
+    resume_final = 'resume'+value+'.tex'
+    template = get_template(resume_final)
+    rendered_resume = template.render(context).encode('UTF-8')
+    save_path = 'resume_storage'
+    file_name = user1.first_name+'_'+user1.last_name+'_'+'value'+'.tex'
+    completeName = os.path.join(save_path, file_name)
+    f = open(completeName,"wb+")
+    f.write(rendered_resume)
+    proc = subprocess.Popen(['pdflatex','-output-directory',save_path, completeName])
+    proc.communicate()
+    return redirect('index')
+
+
+@login_required
+def resume_choice(request):
+    return render(request,'resume_to_pdf.html')
+
+
+
+
 
 
 #porfolio site
-
 def portfolio(request,username):
     user1 = User.objects.get(username=username)
     profile = user1.profile
@@ -156,8 +190,12 @@ def portfolio(request,username):
     projects = Project.objects.filter(profile=profile).order_by('-project_start_date')
     edu = Education.objects.filter(profile=profile).order_by('-grad_year')
     work = work_exp.objects.filter(profile=profile).order_by('-start_date')
-    print(projects,skills,edu,work)
-    return redirect('index')
+    pors = position_of_reponsiblity.objects.filter(profile=profile).order_by('-start_date')
+    #print(projects,skills,edu,work,pors,user1,profile)
+    context = {'user':user1,'profile':profile,'projects':projects,'edu':edu,'work':work,'skills':skills,'pors':pors}
+    #print(context)
+    return render(request,'portfolio.html',context)
+    #return redirect('index')
 
 
 # def update_profile(request, user_id):

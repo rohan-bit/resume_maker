@@ -1,0 +1,135 @@
+%-------------------------
+% Resume in Latex
+% Author : Sourabh Bajaj
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[pdftex]{hyperref}
+\usepackage{fancyhdr}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.375in}
+\addtolength{\evensidemargin}{-0.375in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\href{http://sourabhbajaj.com/}{\Large {{user.first_name}} {{user.last_name}} }} & Email : \href{mailto:{{user.email}} }{ {{user.email}} }\\
+  \href{http://127.0.0.1:8000/portfolio/{{user.username}} }{http://127.0.0.1:8000/portfolio/{{user.username}} } & Mobile : {{profile.phone_no}} \\
+\end{tabular*}
+
+
+%-----------EDUCATION-----------------
+{%if edu is not NONE %}
+\section{Education}
+\begin{itemize}[leftmargin=*]
+{% for ed in edu %}
+    \vspace{-1pt}\item
+        \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+                \textbf { {{ed.title}} } &  {{ed.start_year}} - {%if ed.present is True %} {Present} {% else %} { {{ ed.grad_year }} } {%endif%} \\
+                \textit { \small {{ ed.school_name }} } & {\small {{ ed.percentage }} }
+        \end{tabular*} \vspace{-5pt}
+{% endfor %}
+\end{itemize}
+{% endif %}
+
+%-----------EXPERIENCE-----------------
+%company_name ,company_location,job_position,start_date,job_description
+{%if work is not NONE%}
+\section{Experience}
+\begin{itemize}[leftmargin=*]
+{%for wo in work %}
+    \vspace{-1pt}\item
+        \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+            \textbf{ {{wo.company_name}} } & {{wo.start_year}} - {%if wo.present is True %} {Present} {% else %} { {{ wo.grad_year }} } {%endif%} \\
+            \textit {\small {{wo.job_position}} } & {{wo.company_location}} \\
+        \end{tabular*} \vspace{-5pt}
+    {\small {{wo.job_description}} }
+{% endfor %}
+\end{itemize}
+{% endif %}
+
+%-----------PROJECTS-----------------
+%project_name,project_github_link,project_bio
+{% if projects is not NONE %}
+\section{Projects}
+\begin{itemize}[leftmargin=*]
+    {% for project in projects %}
+        \vspace{-1pt}\item
+           \textbf{\href{ https://{{project.project_github_link}} } { {{project.project_name}} } }\\
+        {\small {{project.project_bio}} }\\
+        \textbf{Tech Used : } {\small {{project.project_tech_stack}} }
+    {% endfor %}
+\end{itemize}
+{% endif %}
+%
+%--------PROGRAMMING SKILLS------------
+{%if skills is not NONE %}
+\section{Programming Skills}
+      {%for skill in skills %}
+        \textbf{ {{skill.skill_name}} }
+      {% endfor %}
+{% endif %}
+
+%-------------------------------------------
+\end{document}

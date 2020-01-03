@@ -19,12 +19,13 @@ class Add_Project(forms.ModelForm):
 class Add_Edu(forms.ModelForm):
     class Meta :
         model = Education
-        fields = ('title','percentage','grad_year',)
+        fields = ('title','percentage','school_name','start_year','present','grad_year',)
 
 class Add_Work_Exp(forms.ModelForm):
+    end_date =  forms.DateTimeField(required=False)
     class Meta :
         model = work_exp
-        fields = ('job_position','start_date','job_description')
+        fields = ('job_position','company_name','start_date','present','end_date','job_description',)
 
 class Add_SkillSet(forms.ModelForm):
     class Meta :
@@ -38,6 +39,8 @@ class Add_postion_of_responsibilty(forms.ModelForm):
         fields = ('position','start_date','end_date')
 
 
+# class resume_choice_form(forms.Form):
+#     pass
 
 # def add_project():
 #     pass
