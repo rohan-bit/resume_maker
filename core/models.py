@@ -81,7 +81,8 @@ class Awards(models.Model):
 class messages(models.Model):
     sender_profile = models.ForeignKey(Profile,on_delete = models.CASCADE,null=True,related_name='sender_profile')
     is_anon = models.BooleanField(null=False,default=False)
-    receiver_profile = models.ForeignKey(Profile,on_delete = models.CASCADE,null=True,related_name='reciver_profile')
+    receiver_profile = models.ForeignKey(Profile,on_delete = models.CASCADE,null=True,related_name='receiver_profile')
+    time_of_message = models.DateTimeField(null=True)
     note = models.TextField(null=True)
 
 # class Resume(models.Model):

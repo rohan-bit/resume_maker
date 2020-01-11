@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+
+
+{% block content %}
+    <h2>Your message are here</h2>
+    {% for message in messages %}
+        {{ forloop.counter }}
+        {{message.note}} <br>
+        {% if message.is_anon is False %}
+            {{message.sender_profile.user.username}}<br>
+        {% else %}
+            <p>By someone </p>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

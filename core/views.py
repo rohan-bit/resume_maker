@@ -1,9 +1,9 @@
-from django.http import HttpResponse
+from django.http import HttpResponse,FileResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate,logout
 from django.shortcuts import render, redirect
-from core.forms import SignUpForm,Add_Project,Add_Edu,Add_Work_Exp,Add_SkillSet,Add_postion_of_responsibilty
-from core.models import Profile,Project,Education,work_exp,skillset,position_of_reponsiblity,User
+from core.forms import SignUpForm,Add_Project,Add_Edu,Add_Work_Exp,Add_SkillSet,Add_postion_of_responsibilty,message_form
+from core.models import Profile,Project,Education,work_exp,skillset,position_of_reponsiblity,User,messages
 from django.template.loader import get_template
 import tempfile
 import subprocess
@@ -11,6 +11,9 @@ from subprocess import Popen, PIPE
 import os
 import pdflatex
 import sys
+from datetime import datetime
+
+
 # Create your views here.
 def index(request):
     return  render(request,'home.html')
@@ -164,13 +167,16 @@ def resume_maker(request,value):
     template = get_template(resume_final)
     rendered_resume = template.render(context).encode('UTF-8')
     save_path = 'resume_storage'
-    file_name = user1.first_name+'_'+user1.last_name+'_'+'value'+'.tex'
+    file_name = user1.first_name+'_'+user1.last_name+'_'+value+'.tex'
+    file_name_pdf = user1.first_name+'_'+user1.last_name+'_'+value+'.pdf'
     completeName = os.path.join(save_path, file_name)
+    completeName_pdf = os.path.join(save_path,file_name_pdf)
     f = open(completeName,"wb+")
     f.write(rendered_resume)
     proc = subprocess.Popen(['pdflatex','-output-directory',save_path, completeName])
     proc.communicate()
-    return redirect('index')
+    return FileResponse(open(completeName_pdf,"rb"),content_type='application/pdf')
+    #return redirect('index')
 
 
 @login_required
@@ -178,27 +184,47 @@ def resume_choice(request):
     return render(request,'resume_to_pdf.html')
 
 
-
-
-
-
 #porfolio site
 def portfolio(request,username):
     user1 = User.objects.get(username=username)
     profile = user1.profile
+    user_outsider = request.user
     skills = skillset.objects.filter(profile=profile).order_by('level')
     projects = Project.objects.filter(profile=profile).order_by('-project_start_date')
     edu = Education.objects.filter(profile=profile).order_by('-grad_year')
     work = work_exp.objects.filter(profile=profile).order_by('-start_date')
     pors = position_of_reponsiblity.objects.filter(profile=profile).order_by('-start_date')
-    #print(projects,skills,edu,work,pors,user1,profile)
-    context = {'user':user1,'profile':profile,'projects':projects,'edu':edu,'work':work,'skills':skills,'pors':pors}
-    #print(context)
+    context = {'user':user1,'profile':profile,'projects':projects,'edu':edu,'works':work,'skills':skills,'pors':pors,'user_outsider':user_outsider}
     return render(request,'portfolio.html',context)
-    #return redirect('index')
+
+
+@login_required
+def send_message(request,username):
+    if request.method == 'POST' :
+        form = message_form(request.POST)
+        if form.is_valid():
+            mess = form.save()
+            mess.sender_profile = request.user.profile
+            user1 = User.objects.get(username=username)
+            mess.receiver_profile = user1.profile
+            mess.time_of_message = datetime.now()
+            mess.save()
+            return redirect('index')
+    else :
+        form = message_form()
+    return render(request,'send_message.html',{'form':form})
+
+
+@login_required
+def view_message(request):
+    messages_obj = messages.objects.filter(receiver_profile=request.user.profile).order_by('-time_of_message')
+    return render(request,'view_message.html',{'messages':messages_obj})
+
+
 
 
 # def update_profile(request, user_id):
 #     user = User.objects.get(pk=user_id)
 #     user.profile.address = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit...'
 #     user.save()
+

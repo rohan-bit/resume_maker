@@ -3,4 +3,34 @@
 {% block content %}
     <h2>{{user.first_name}} {{user.last_name}}</h2>
     <h6>{{profile.phone_no}}</h6>
+    <h6>Projects</h6>
+    {%for pro in projects %}
+        {{forloop.counter}}
+        {{pro.project_name}}
+        <br>
+        {{pro.project_bio}}
+    {% endfor %}
+    <h6>Education</h6>
+    {%for ed in edu %}
+        {{forloop.counter}}
+        {{ed.title}}<br>
+        {{ed.school_name}} {{ed.percentage}}
+    {% endfor %}
+    <h6>Skillset</h6>
+    {%for skill in skills %}
+        {{forloop.counter}}
+        {{skill.skill_name}}<br>
+        {{skill.level}}
+    {% endfor %}
+    <h6>Work Experiance</h6>
+    {% for work in works %}
+        {{forloop.counter}}
+        {{work.company_name}}<br>
+        {{work.company_location}}<br>
+        {{work.job_position}}<br>
+        {{work.job_description}}<br>
+    {% endfor %}
+    {% if user_outsider is not NULL and user_outsider != profile.user %}
+       <a class="btn btn-primary" href="{% url 'message' username=profile.user.username%}" role="button">Add Education</a>
+    {% endif %}
 {% endblock %}

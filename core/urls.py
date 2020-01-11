@@ -18,6 +18,8 @@ urlpatterns = [
     path('resume_choice',views.resume_choice),
     re_path(r'^resume/(?P<value>\d+)/$',views.resume_maker),
     re_path(r'^portfolio/(?P<username>[\w.@+-]+)/$',views.portfolio),
+    re_path(r'^message/(?P<username>[\w.@+-]+)/$',views.send_message,name='message'),
+    path('view_message',views.view_message,name='view_message'),
     path('login',auth_views.LoginView.as_view(template_name="/home/rohan/resume_maker/core/templates/login.html"),name='login'),
     path('logout',views.logout_user,name='logout'),
     # path(),

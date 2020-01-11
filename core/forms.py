@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from core.models import Profile,Project,Education,work_exp,skillset,position_of_reponsiblity
+from core.models import Profile,Project,Education,work_exp,skillset,position_of_reponsiblity,messages
 from django.contrib.auth.models import User
 from phonenumber_field.formfields import PhoneNumberField
 
@@ -37,6 +37,12 @@ class Add_postion_of_responsibilty(forms.ModelForm):
     class Meta :
         model = position_of_reponsiblity
         fields = ('position','start_date','end_date')
+
+
+class message_form(forms.ModelForm):
+    class Meta :
+        model = messages
+        fields = ('note','is_anon')
 
 
 # class resume_choice_form(forms.Form):
