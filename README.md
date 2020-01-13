@@ -11,3 +11,7 @@
   To know about tables in database and their relation refer the models.py in core folder [link](https://github.com/rohan-bit/resume_maker/blob/master/core/models.py)
 # Setup and Installion
   1. Clone this project on your local machine.
+  2. For email services uncomment the email settings in setting.py file and add your google email id and password(if you are using 2 step authentication make an app password for it.
+  3. In our project we have use MySql as our DataBase.
+  
+  
