@@ -7,7 +7,7 @@
   2. Create a portfolio website for user
   3. Create a feedback system so that each user can get feedback for their profile and also feedback can be anonymous in                                    nature.
   4. User can share their portfolio website through email.
-# Class Diagram
-  [a link](https://github.com/user/repo/blob/branch/other_file.md)
+# Database
+  To know about tables in database and their relation refer the models.py in core folder [link](https://github.com/rohan-bit/resume_maker/blob/master/core/models.py)
 # Setup and Installion
   1. Clone this project on your local machine.
