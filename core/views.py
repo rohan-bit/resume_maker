@@ -14,6 +14,15 @@ import os
 import pdflatex
 import sys
 from datetime import datetime
+from contextlib import contextmanager
+import shutil
+@contextmanager
+def make_temp_directory():
+    temp_dir = tempfile.mkdtemp()
+    try:
+        yield temp_dir
+    finally:
+        shutil.rmtree(temp_dir,ignore_errors =True)
 
 
 # Create your views here.
@@ -169,7 +178,7 @@ def resume_maker(request,value):
     rendered_resume = template.render(context).encode('UTF-8')
     file_name = user1.first_name+'_'+user1.last_name+'_'+value+'.tex'
     file_name_pdf = user1.first_name+'_'+user1.last_name+'_'+value+'.pdf'
-    with tempfile.TemporaryDirectory() as tmpdirname:
+    with  make_temp_directory() as tmpdirname:
         print('created temporary directory', tmpdirname)
         completeName = os.path.join(tmpdirname, file_name)
         completeName_pdf = os.path.join(tmpdirname,file_name_pdf)
