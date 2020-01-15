@@ -1,7 +1,7 @@
 # Online Resume Generator
 
 # Description
-  A lot of people want to create their resume and want in different format so this application will help you from choosing different template of resume and user will genterate in different in pdf format for them.
+  A lot of people want to create their resume and want in different format so this application will help you from choosing different template of resume and user will get resume in different template in pdf format for them.
 # Features
   1. Create different types of resume for each user 
   2. Create a portfolio website for user
@@ -12,6 +12,6 @@
 # Setup and Installion
   1. Clone this project on your local machine.
   2. For email services uncomment the email settings in setting.py file and add your google email id and password(if you are using 2 step authentication make an app password for it.
-  3. In our project we have use MySql as our DataBase.
+  3. In our project we have use MySql as our DataBase and setting up your mysql database follow this [link](https://www.digitalocean.com/community/tutorials/how-to-create-a-django-app-and-connect-it-to-a-database)
   
   
