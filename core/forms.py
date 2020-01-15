@@ -44,6 +44,8 @@ class message_form(forms.ModelForm):
         model = messages
         fields = ('note','is_anon')
 
+class sharing_form(forms.Form):
+    email_id = forms.EmailField(label='Email of the person',max_length=150)
 
 # class resume_choice_form(forms.Form):
 #     pass

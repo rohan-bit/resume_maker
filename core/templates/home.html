@@ -9,10 +9,11 @@
 <body>
     {%if user.is_authenticated %}
         <p>welcome {{user.first_name}} {{user.last_name}}</p>
-        <p>Add your project here</p>
-        <a class="btn btn-primary" href="{% url 'add_project' %}" role="button" >Add Project </a><br>
         <p>Logout</p>
         <a class="btn btn-success" href="{% url 'logout' %}" role="button">logout</a>
+        <br>
+        <p>Add your project here</p>
+        <a class="btn btn-primary" href="{% url 'add_project' %}" role="button" >Add Project </a><br>
         <br>
         <p>View your Projects</p>
         <a class="btn btn-warning" href="{% url 'view_project' %}" role="button">View</a>
@@ -40,6 +41,11 @@
         <br>
         <p>View your position of responsibilty</p>
         <a class="btn btn-warning" href="{% url 'view_position' %}" role="button">View</a>
+        <p> Make your resume here </p>
+        <a class="btn btn-primary" href="{%url 'resume'%}" role="button">Make</a>
+        <br>
+        <p>Share</p>
+        <a class="btn btn-success" href="{%url 'share'%}" role="button">Share</a>
     {% else %}
     <p>
         Are you new to this website ?<br>

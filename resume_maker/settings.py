@@ -82,8 +82,10 @@ WSGI_APPLICATION = 'resume_maker.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '/etc/mysql/my.cnf',
+        },
     }
 }
 
@@ -122,6 +124,12 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = 'index'
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

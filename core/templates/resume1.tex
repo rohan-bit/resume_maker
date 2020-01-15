@@ -15,7 +15,7 @@
 \usepackage{enumitem}
 \usepackage[pdftex]{hyperref}
 \usepackage{fancyhdr}
-
+\usepackage{amsmath}
 
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer fields
@@ -80,7 +80,7 @@
 
 
 %-----------EDUCATION-----------------
-{%if edu is not NONE %}
+{%if edu  %}
 \section{Education}
 \begin{itemize}[leftmargin=*]
 {% for ed in edu %}
@@ -95,7 +95,7 @@
 
 %-----------EXPERIENCE-----------------
 %company_name ,company_location,job_position,start_date,job_description
-{%if work is not NONE%}
+{%if work %}
 \section{Experience}
 \begin{itemize}[leftmargin=*]
 {%for wo in work %}
@@ -111,7 +111,7 @@
 
 %-----------PROJECTS-----------------
 %project_name,project_github_link,project_bio
-{% if projects is not NONE %}
+{% if projects  %}
 \section{Projects}
 \begin{itemize}[leftmargin=*]
     {% for project in projects %}
@@ -124,7 +124,7 @@
 {% endif %}
 %
 %--------PROGRAMMING SKILLS------------
-{%if skills is not NONE %}
+{%if skills %}
 \section{Programming Skills}
       {%for skill in skills %}
         \textbf{ {{skill.skill_name}} }
