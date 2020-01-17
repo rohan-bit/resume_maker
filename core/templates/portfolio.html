@@ -31,6 +31,6 @@
         {{work.job_description}}<br>
     {% endfor %}
     {% if user_outsider is not NULL and user_outsider != profile.user %}
-       <a class="btn btn-primary" href="{% url 'message' username=profile.user.username%}" role="button">Add Education</a>
+       <a class="btn btn-primary" href="{% url 'message' username=profile.user.username%}" role="button">Give Feedback</a>
     {% endif %}
 {% endblock %}
