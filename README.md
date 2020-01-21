@@ -18,3 +18,5 @@
   2. Clone this project on your local machine.
   3. For email services uncomment the email settings in setting.py file and add your google email id and password(if you are using 2 step authentication make an app password for it.
   4. In our project we have use MySql as our DataBase and setting up your mysql database follow this [link](https://www.digitalocean.com/community/tutorials/how-to-create-a-django-app-and-connect-it-to-a-database)
+# FlowDiagram
+[link](https://drive.google.com/file/d/1sQuzQ0yN1HzbpEJZRt1Eue0LWVYkeLWO/view?usp=sharing)

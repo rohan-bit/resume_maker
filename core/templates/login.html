@@ -4,7 +4,7 @@
 
 {%block content%}
     <h2>Login Form</h2>
-    <form method="post">
+      <form method="post">
     {% csrf_token %}
     {% for hidden_field in form.hidden_fields %}
         {{ hidden_field }}
@@ -14,6 +14,8 @@
         <div class="form-group">
         <label for="{{ field.id_for_label }}">{{ field.label }}</label>
         {{ field|add_class:'form-control' }}
+<!--        -->
+<!--        {{ field }}-->
         {% if field.help_text %}
           <small style="color: grey">{{ field.help_text }}</small>
           {% endif %}
@@ -23,6 +25,6 @@
       </p>
     {% endfor %}
     <button type="submit" class="btn btn-primary" >Login</button>
-        <a class="btn btn-danger" href="{%url 'signup'%}" type="button">Sign Up</a>
     </form>
+     <a class="btn btn-danger" href="{%url 'signup'%}" type="button">Sign Up</a>
 {%endblock%}
