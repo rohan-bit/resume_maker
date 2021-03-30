@@ -1,4 +1,4 @@
-django==3.0
+django==3.0.12
 django-allauth==0.40.0
 django-crispy-forms==1.8.1
 django-filter==2.2.0
